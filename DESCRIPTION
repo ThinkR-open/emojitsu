@@ -13,6 +13,7 @@ Imports: readr,
     dplyr,
     purrr,
     Rcpp,
-    magrittr
+    magrittr,
+    tidyr
 RoxygenNote: 6.0.1.9000
 LinkingTo: Rcpp

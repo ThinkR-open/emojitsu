@@ -8,9 +8,10 @@
 #' @importFrom tibble tibble
 #' @importFrom dplyr mutate pull select
 #' @importFrom purrr map_chr
+#' @importFrom tidyr unnest
 #' @export
 parse_emoji_data <- function( file ){
-  read_lines( "data-raw/emoji-data.txt", locale = locale(encoding="utf-8") ) %>%
+  read_lines( file , locale = locale(encoding="utf-8") ) %>%
     str_subset("^[^#]") %>%
     tibble( spec = .) %>%
     mutate(
@@ -21,5 +22,7 @@ parse_emoji_data <- function( file ){
       value       = map_chr(data, 2) %>% str_split("#") %>% map_chr(1) %>% str_trim(),
       description = spec %>% str_replace("^.*[)][[:space:]]+", "" )
     ) %>%
-    select( char_range, code_point, value, description )
+    select( char_range, code_point, value, description ) %>%
+    unnest()
 }
+
