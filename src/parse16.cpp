@@ -27,6 +27,8 @@ int parse_digit( char d){
   return 0 ;
 }
 
+//' @export
+// [[Rcpp::export]]
 int parse16_one( const char* spec ){
   int n = strlen(spec) ;
   int m = 1 ;
@@ -54,5 +56,19 @@ List parse16( List spec ) {
   int n = spec.size() ;
   List res = lapply( spec, parse16_range ) ;
   return res ;
+}
+
+//' @export
+// [[Rcpp::export]]
+IntegerVector fromCodePoint( const char* s){
+  int codePoint = parse16_one(s) ;
+  if( codePoint <= 0xFFFF ){
+    return IntegerVector::create(codePoint) ;
+  } else {
+    codePoint -= 0x10000 ;
+    int highSurrogate = (codePoint >> 10) + 0xD800;
+    int lowSurrogate = (codePoint % 0x400) + 0xDC00;
+    return IntegerVector::create(highSurrogate,lowSurrogate  ) ;
+  }
 }
 

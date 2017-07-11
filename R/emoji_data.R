@@ -26,3 +26,15 @@ parse_emoji_data <- function( file ){
     unnest()
 }
 
+
+#' @export
+parse_emoji_sequence <- function(file){
+  read_lines( file , locale = locale(encoding="utf-8") ) %>%
+    str_subset("^[^#]") %>%
+    tibble( spec = . ) %>%
+    mutate(
+      data = str_split( spec, ";" ),
+      sequence = str_trim(map_chr(data, 1)),
+      parts = str_split(sequence, " ")
+    )
+}

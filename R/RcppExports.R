@@ -2,7 +2,17 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' @export
+parse16_one <- function(spec) {
+    .Call('emojirx_parse16_one', PACKAGE = 'emojirx', spec)
+}
+
+#' @export
 parse16 <- function(spec) {
     .Call('emojirx_parse16', PACKAGE = 'emojirx', spec)
+}
+
+#' @export
+fromCodePoint <- function(s) {
+    .Call('emojirx_fromCodePoint', PACKAGE = 'emojirx', s)
 }
 

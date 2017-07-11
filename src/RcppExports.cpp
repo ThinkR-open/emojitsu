@@ -5,6 +5,17 @@
 
 using namespace Rcpp;
 
+// parse16_one
+int parse16_one(const char* spec);
+RcppExport SEXP emojirx_parse16_one(SEXP specSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const char* >::type spec(specSEXP);
+    rcpp_result_gen = Rcpp::wrap(parse16_one(spec));
+    return rcpp_result_gen;
+END_RCPP
+}
 // parse16
 List parse16(List spec);
 RcppExport SEXP emojirx_parse16(SEXP specSEXP) {
@@ -16,9 +27,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// fromCodePoint
+IntegerVector fromCodePoint(const char* s);
+RcppExport SEXP emojirx_fromCodePoint(SEXP sSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const char* >::type s(sSEXP);
+    rcpp_result_gen = Rcpp::wrap(fromCodePoint(s));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
+    {"emojirx_parse16_one", (DL_FUNC) &emojirx_parse16_one, 1},
     {"emojirx_parse16", (DL_FUNC) &emojirx_parse16, 1},
+    {"emojirx_fromCodePoint", (DL_FUNC) &emojirx_fromCodePoint, 1},
     {NULL, NULL, 0}
 };
 
