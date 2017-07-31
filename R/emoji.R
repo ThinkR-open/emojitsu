@@ -2,10 +2,11 @@
 #'
 #' @param url url for emoji list file
 #'
+#' @importFrom magrittr %>% not
 #' @importFrom tibble tibble
 #' @importFrom dplyr mutate case_when select
-#' @importFrom rvest html_attr html_nodes html_node
-#' @importFrom stringr str_replace str_split
+#' @importFrom rvest html_attr html_nodes html_node html_text
+#' @importFrom stringr str_replace str_split str_detect str_replace_all
 #' @importFrom xml2 read_html
 #' @export
 parse_emoji_list <- function(
