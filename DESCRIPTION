@@ -14,6 +14,8 @@ Imports: readr,
     purrr,
     Rcpp,
     magrittr,
-    tidyr
+    tidyr,
+    rvest,
+    xml2
 RoxygenNote: 6.0.1.9000
 LinkingTo: Rcpp
