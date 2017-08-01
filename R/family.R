@@ -1,48 +1,4 @@
 
-#' convert space separated runes into their character representation
-#'
-#' @param runes vector of space separated runes
-#'
-#' @examples
-#' runes_to_char( "U+1F468" )
-#'
-#' @importFrom tibble tibble
-#' @importFrom stringi stri_unescape_unicode
-#' @importFrom stringr str_replace_all str_split
-#' @importFrom purrr map_chr
-#' @importFrom magrittr %>%
-#' @export
-from_runes <- function(runes){
-  str_split(runes, " ") %>%
-    map_chr( ~{
-      str_replace_all(.x, "U[+]", "") %>%
-        sprintf( "\\U%08s", . ) %>%
-        paste(collapse="") %>%
-        stri_unescape_unicode()
-    } )
-}
-
-#' runes
-#'
-#' @param str character representation of runes, e.g `"U+1F468"`
-#'
-#' @export
-runes <- function(x){
-  # TODO: assert this is valid runes
-  structure(x, class = "unes")
-}
-
-#' @export
-print.runes <- function(x, ...){
-  #TODO: print in color shwing how many bytes the rune needs
-  cat( x, "\n")
-  invisible(x)
-}
-
-emoji <- function( txt ){
-  structure( txt, class = "emoji" )
-}
-
 #' @export
 man <- emoji( from_runes("U+1F468") )
 
@@ -55,12 +11,8 @@ boy <- emoji( from_runes("U+1F466") )
 #' @export
 girl <- emoji( from_runes("U+1F467") )
 
-zero_width_join <- function(..., .data =c(...)){
-  paste( .data, collapse = from_runes("U+200D") )
-}
 
 heart <- from_runes("U+2764 U+FE0F")
-
 kiss_mark <- from_runes( "U+1F48B")
 
 #' Family emoji sequences
@@ -145,16 +97,3 @@ holding_hands <- function(x, y){
   }
 
 }
-
-
-
-#' @export
-print.emoji <- function(x, ...){
-  cat(x, "\n")
-  invisible(x)
-}
-
-globalVariables( c("man", "woman", "boy", "girl") )
-
-
-
