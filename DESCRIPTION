@@ -15,3 +15,9 @@ Imports: rlang,
     purrr,
     magrittr,
     assertthat
+Collate: 
+    'emojirx.R'
+    'body.R'
+    'emojis_data.R'
+    'family.R'
+    'tones.R'
