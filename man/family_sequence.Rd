@@ -2,9 +2,12 @@
 % Please edit documentation in R/family.R
 \name{couple_with_heart}
 \alias{couple_with_heart}
-\title{Emoji sequence for couple with heart}
+\alias{kiss}
+\title{Family emoji sequences}
 \usage{
-couple_with_heart(x, y)
+couple_with_heart(x = woman, y = man)
+
+kiss(x = man, y = woman)
 }
 \arguments{
 \item{x}{man or woman}
@@ -12,5 +15,12 @@ couple_with_heart(x, y)
 \item{y}{man or woman}
 }
 \description{
-Emoji sequence for couple with heart
+Family emoji sequences
+}
+\examples{
+\dontrun{
+couple_with_heart( man, woman)
+kiss( man, man )
+}
+
 }

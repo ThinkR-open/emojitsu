@@ -12,7 +12,7 @@
 #' @importFrom purrr map_chr
 #' @importFrom magrittr %>%
 #' @export
-runes_to_char <- function(runes){
+from_runes <- function(runes){
   str_split(runes, " ") %>%
     map_chr( ~{
       str_replace_all(.x, "U[+]", "") %>%
@@ -22,35 +22,90 @@ runes_to_char <- function(runes){
     } )
 }
 
+#' runes
+#'
+#' @param str character representation of runes, e.g `"U+1F468"`
+#'
+#' @export
+runes <- function(x){
+  # TODO: assert this is valid runes
+  structure(x, class = "unes")
+}
 
-family_runes <- c( man   = "U+1F468", woman = "U+1F469", boy   = "U+1F466", girl  = "U+1F467" )
+#' @export
+print.runes <- function(x, ...){
+  #TODO: print in color shwing how many bytes the rune needs
+  cat( x, "\n")
+  invisible(x)
+}
 
-#' Emoji sequence for couple with heart
+emoji <- function( txt ){
+  structure( txt, class = "emoji" )
+}
+
+#' @export
+man <- emoji( from_runes("U+1F468") )
+
+#' @export
+woman <- emoji( from_runes("U+1F469") )
+
+#' @export
+boy <- emoji( from_runes("U+1F466") )
+
+#' @export
+girl <- emoji( from_runes("U+1F467") )
+
+zero_width_join <- function(...){
+  paste( c(...), collapse = from_runes("U+200D") )
+}
+
+heart <- from_runes("U+2764 U+FE0F")
+
+kiss_mark <- from_runes( "U+1F48B")
+
+#' Family emoji sequences
 #'
 #' @param x man or woman
 #' @param y man or woman
 #'
 #' @importFrom assertthat assert_that
 #' @importFrom rlang quo_name enquo
+#' @rdname family_sequence
+#'
+#' @examples
+#' \dontrun{
+#' couple_with_heart( man, woman)
+#' kiss( man, man )
+#' }
+#'
 #' @export
-couple_with_heart <- function(x, y){
-  # TODO: make sure x and y are man or woman
-  x <- quo_name(enquo(x))
-  y <- quo_name(enquo(y))
-
-  adults <- c("man", "woman")
+couple_with_heart <- function(x = woman, y = man){
+  adults <- c(man, woman)
   assert_that( x %in% adults)
   assert_that( y %in% adults)
 
   # only 3 cases are supported, so we just swap the 4th case
-  if( x == "man" && y == "woman"){
-    x <- "woman"
-    y <- "man"
+  if( x == man && y == woman){
+    x <- woman
+    y <- man
   }
 
-  runes <- paste( family_runes[x], "U+200D U+2764 U+FE0F U+200D" , family_runes[y] )
-  char  <- runes_to_char( runes )
-  structure(char, class = "emoji")
+  emoji( zero_width_join(x, heart, y) )
+}
+
+#' @rdname family_sequence
+#' @export
+kiss <- function(x = man, y = woman){
+  adults <- c(man, woman)
+  assert_that( x %in% adults)
+  assert_that( y %in% adults)
+
+  # special (default case)
+  if( x == man && y == woman){
+    emoji( from_runes("U+1F48F"))
+  } else {
+    emoji( zero_width_join(x, heart, kiss_mark, y) )
+  }
 }
 
 #' @export
@@ -59,7 +114,7 @@ print.emoji <- function(x, ...){
   invisible(x)
 }
 
-globalVariables( c("man", "woman") )
+globalVariables( c("man", "woman", "boy", "girl") )
 
 
 
