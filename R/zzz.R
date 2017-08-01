@@ -1,2 +1,0 @@
-#' @useDynLib emojirx
-NULL

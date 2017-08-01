@@ -7,15 +7,4 @@ Depends: R (>= 3.4.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: readr,
-    stringr,
-    tibble,
-    dplyr,
-    purrr,
-    Rcpp,
-    magrittr,
-    tidyr,
-    rvest,
-    xml2
 RoxygenNote: 6.0.1.9000
-LinkingTo: Rcpp
