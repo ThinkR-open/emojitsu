@@ -39,6 +39,7 @@ print.runes <- function(x, ...){
   invisible(x)
 }
 
+#' @export
 emoji <- function( txt ){
   structure( txt, class = "emoji" )
 }
