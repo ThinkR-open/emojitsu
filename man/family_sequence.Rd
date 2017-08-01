@@ -3,11 +3,14 @@
 \name{couple_with_heart}
 \alias{couple_with_heart}
 \alias{kiss}
+\alias{family}
 \title{Family emoji sequences}
 \usage{
 couple_with_heart(x = woman, y = man)
 
 kiss(x = man, y = woman)
+
+family(...)
 }
 \arguments{
 \item{x}{man or woman}

@@ -55,8 +55,8 @@ boy <- emoji( from_runes("U+1F466") )
 #' @export
 girl <- emoji( from_runes("U+1F467") )
 
-zero_width_join <- function(...){
-  paste( c(...), collapse = from_runes("U+200D") )
+zero_width_join <- function(..., .data =c(...)){
+  paste( .data, collapse = from_runes("U+200D") )
 }
 
 heart <- from_runes("U+2764 U+FE0F")
@@ -107,6 +107,23 @@ kiss <- function(x = man, y = woman){
     emoji( zero_width_join(x, heart, kiss_mark, y) )
   }
 }
+
+#' @rdname family_sequence
+#' @export
+family <- function(...){
+  members <- c(...)
+
+  # special default case
+  if( length(members) == 0){
+    emoji( from_runes("U+1F46A") )
+  } else {
+    # TODO: check that there are 1 or 2 parents and 1 or two kids
+    # TODO: when parents are one of each, check that man comes first (don't blame me)
+    emoji( zero_width_join(.data = members) )
+  }
+
+}
+
 
 #' @export
 print.emoji <- function(x, ...){
