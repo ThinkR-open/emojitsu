@@ -4,6 +4,7 @@
 \alias{couple_with_heart}
 \alias{kiss}
 \alias{family}
+\alias{holding_hands}
 \title{Family emoji sequences}
 \usage{
 couple_with_heart(x = woman, y = man)
@@ -11,6 +12,8 @@ couple_with_heart(x = woman, y = man)
 kiss(x = man, y = woman)
 
 family(...)
+
+holding_hands(x, y)
 }
 \arguments{
 \item{x}{man or woman}
@@ -24,6 +27,7 @@ Family emoji sequences
 \dontrun{
 couple_with_heart( man, woman)
 kiss( man, man )
+holding_hands( man, woman )
 }
 
 }

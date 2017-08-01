@@ -76,6 +76,7 @@ kiss_mark <- from_runes( "U+1F48B")
 #' \dontrun{
 #' couple_with_heart( man, woman)
 #' kiss( man, man )
+#' holding_hands( man, woman )
 #' }
 #'
 #' @export
@@ -123,6 +124,28 @@ family <- function(...){
   }
 
 }
+
+man_and_woman_holding_hands <- emoji( from_runes("U+1F46B") )
+two_men_holding_hands <- emoji( from_runes("U+1F46C") )
+two_women_holding_hands <- emoji( from_runes("U+1F46D") )
+
+#' @rdname family_sequence
+#' @export
+holding_hands <- function(x, y){
+  adults <- c(man, woman)
+  assert_that( x %in% adults)
+  assert_that( y %in% adults)
+
+  if( x == man && y == man){
+    two_men_holding_hands
+  } else if( x == woman && y == woman ){
+    two_women_holding_hands
+  } else {
+    man_and_woman_holding_hands
+  }
+
+}
+
 
 
 #' @export
